@@ -22,7 +22,22 @@ public class ProdutoController {
         return repository.save(produto);
     }
     @DeleteMapping("/{id}")
-    public void remover(@PathVariable Produto produto) {
-        repository.deleteById(produto.getId());
+    public void remover(@PathVariable Long id) {
+        repository.deleteById(id);
     }
+    @PutMapping("/{id}")
+    public Produto atualizar(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
+        // 2. Buscamos o produto original no banco
+        return repository.findById(id).map(produto -> {
+            // 3. Atualizamos apenas os campos necessários
+            produto.setNome(produtoAtualizado.getNome());
+            produto.setPreco(produtoAtualizado.getPreco());
+            produto.setDescricao(produtoAtualizado.getDescricao());
+
+            // 4. Salvamos a versão atualizada
+            return repository.save(produto);
+        }).orElseThrow(() -> new RuntimeException("Produto não encontrado "));
+    }
+
 }
+

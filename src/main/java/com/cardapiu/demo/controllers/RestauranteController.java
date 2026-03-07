@@ -22,7 +22,7 @@ public class RestauranteController {
         return repository.save(restaurante);
     }
     @DeleteMapping("/{id}")
-    public void remover(@PathVariable Restaurante id) {
-        repository.deleteById(id.getId());
+    public void remover(@PathVariable Long id) {
+        repository.deleteById(id);
     }
 }
