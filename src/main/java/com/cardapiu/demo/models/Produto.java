@@ -1,4 +1,5 @@
 package com.cardapiu.demo.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,12 @@ public class Produto {
     private String descricao;
     private Double preco;
     private String urlImage;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = true)
+    @JsonIgnoreProperties("Produtos") // Evita um loop infinito quando o Spring gerar o JSON
+    private Categoria categoria;
+
 
     public Long getId() {
         return id;
