@@ -1,4 +1,14 @@
 package com.cardapiu.demo.dtos;
 
-public class PedidoResponseDTO {
-}
+import com.cardapiu.demo.models.StatusPedido;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public record PedidoResponseDTO(
+        Long id,
+        LocalDateTime dataCriacao,
+        StatusPedido status,
+        List<ItemPedidoResponseDTO> itens,
+        Double valorTotal,
+        String observacao
+) {}

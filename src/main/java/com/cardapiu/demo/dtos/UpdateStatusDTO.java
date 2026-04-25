@@ -1,4 +1,7 @@
 package com.cardapiu.demo.dtos;
 
-public class UpdateStatusDTO {
-}
+import com.cardapiu.demo.models.StatusPedido;
+
+public record UpdateStatusDTO(
+        StatusPedido status
+) {}
