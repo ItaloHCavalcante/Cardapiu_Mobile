@@ -4,7 +4,9 @@ public enum StatusPedido {
     PENDENTE,
     CONFIRMADO,
     EM_PREPARO,
-    SAIU_ENTREGA,
-    ENTREGUE,
-    CANCELADO
+    CANCELADO,
+    AGUARDANDO_ENTREGADOR,
+    SAIU_PARA_ENTREGA,
+    ENTREGUE
+
 }
