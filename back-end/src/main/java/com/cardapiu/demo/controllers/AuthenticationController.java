@@ -46,9 +46,8 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
-        if(this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
+    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
+        if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
 
@@ -56,8 +55,13 @@ public class AuthenticationController {
         novoUsuario.setLogin(data.login());
         novoUsuario.setSenha(encryptedPassword);
 
-        this.repository.save(novoUsuario);
-        return ResponseEntity.ok().build();
+        novoUsuario.setRole(data.role());
 
+       //Para não aparecer o email no lugar do nome
+        novoUsuario.setNome(null);
+
+        this.repository.save(novoUsuario);
+
+        return ResponseEntity.ok().build();
     }
 }

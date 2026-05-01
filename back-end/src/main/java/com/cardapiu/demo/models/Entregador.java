@@ -26,4 +26,8 @@ public class Entregador {
     private Double longitudeAtual;
 
     private Boolean disponivel = true;
+
+    public void Get() {
+
+    }
 }

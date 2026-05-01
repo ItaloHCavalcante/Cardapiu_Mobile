@@ -27,14 +27,16 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // API REST não guarda sessão (Stateless)
                 .authorizeHttpRequests(authorize -> authorize
-                        // Autenticação para o cardapiu
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() // Login é liberado para todos
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() // Cadastro também
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
 
-                        //A partir daqui, será necessário estar autenticado para usar as outras rotas
+                        // Filtros de permissão de acesso
+                        .requestMatchers(HttpMethod.POST, "/produto").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/entregador").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/pedido").hasAnyRole("ADMIN", "USER")
+
+                        // Qualquer outra rota exige apenas que o usuário esteja autenticado
                         .anyRequest().authenticated()
-
-
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
