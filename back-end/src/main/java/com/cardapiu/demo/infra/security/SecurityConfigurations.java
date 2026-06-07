@@ -31,12 +31,22 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
 
                         // Filtros de permissão de acesso
-                        .requestMatchers(HttpMethod.POST, "/produto").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/entregador").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/pedido").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/produtos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/entregadores").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/pedidos").hasAnyRole("ADMIN", "USER")
+
+                        // Apenas os ADMIN e clientes poderão ver ou mexer nos produtos/cardapio
+                        .requestMatchers("/produtos/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/cardapio/**").hasAnyRole("ADMIN", "USER")
+
+                        // Rota exclusiva para os entregadores
+                        .requestMatchers("/entregadores/**").hasAnyRole("ADMIN", "DELIVERER")
+                        .requestMatchers("/entregas/**").hasAnyRole("ADMIN", "DELIVERER")
 
                         // Qualquer outra rota exige apenas que o usuário esteja autenticado
                         .anyRequest().authenticated()
+
+
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

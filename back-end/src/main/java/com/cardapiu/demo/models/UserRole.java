@@ -2,7 +2,8 @@ package com.cardapiu.demo.models;
 
 public enum UserRole {
     ADMIN("admin"),
-    USER("user");
+    USER("user"),
+    DELIVERER("deliverer");
 
     private String role;
 
