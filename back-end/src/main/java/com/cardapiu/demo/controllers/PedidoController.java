@@ -1,6 +1,7 @@
 package com.cardapiu.demo.controllers;
 
 import com.cardapiu.demo.dtos.PedidoRequestDTO;
+import com.cardapiu.demo.dtos.PedidoResponseDTO;
 import com.cardapiu.demo.dtos.UpdateStatusDTO;
 import com.cardapiu.demo.models.Pedido;
 import com.cardapiu.demo.services.PedidoService;
@@ -8,8 +9,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("pedidos")
@@ -19,7 +18,6 @@ public class PedidoController {
     private PedidoService service;
 
     // Rota para o Cliente fazer o pedido
-    // No seu SecurityConfigurations, esta rota deve ser .permitAll()
     @PostMapping
     public ResponseEntity criarPedido(@RequestBody @Valid PedidoRequestDTO data) {
         // No futuro, aqui chamaremos o service para salvar os itens
@@ -28,14 +26,15 @@ public class PedidoController {
 
     // Rota para o Cliente acompanhar o status do pedido dele
     @GetMapping("/{id}")
-    public ResponseEntity<Pedido> buscarPedido(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
+    public ResponseEntity<PedidoResponseDTO> buscarPedido(@PathVariable Long id) {
+        // Agora retorna o DTO que contém o ID da entrega para o rastreamento via Firebase
+        PedidoResponseDTO pedidoResponse = service.buscarPedidoParaRastreio(id);
+        return ResponseEntity.ok(pedidoResponse);
     }
 
     // Rota para o DONO alterar o status (Confirmar, Cancelar, etc)
-    // Esta rota deve exigir o Token JWT no SecurityConfigurations
     @PatchMapping("/{id}/status")
-    public ResponseEntity atualizarStatus(@PathVariable Long id, @RequestBody @Valid UpdateStatusDTO data) {
+    public ResponseEntity<Pedido> atualizarStatus(@PathVariable Long id, @RequestBody @Valid UpdateStatusDTO data) {
         Pedido pedidoAtualizado = service.atualizarStatus(id, data);
         return ResponseEntity.ok(pedidoAtualizado);
     }
