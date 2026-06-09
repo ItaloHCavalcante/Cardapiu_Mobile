@@ -22,5 +22,6 @@ public class ItemPedido {
 
     private Integer quantidade;
     private Double precoUnitario; //Aqui guarda o preço no momento da compra
+    private Double precoTotal; // Adicionado: Valor total para este item (quantidade * precoUnitario)
 
 }

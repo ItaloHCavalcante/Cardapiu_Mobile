@@ -4,10 +4,13 @@ import com.cardapiu.demo.dtos.PedidoRequestDTO;
 import com.cardapiu.demo.dtos.PedidoResponseDTO;
 import com.cardapiu.demo.dtos.UpdateStatusDTO;
 import com.cardapiu.demo.models.Pedido;
+import com.cardapiu.demo.models.Usuario;
 import com.cardapiu.demo.services.PedidoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,9 +22,16 @@ public class PedidoController {
 
     // Rota para o Cliente fazer o pedido
     @PostMapping
-    public ResponseEntity criarPedido(@RequestBody @Valid PedidoRequestDTO data) {
-        // No futuro, aqui chamaremos o service para salvar os itens
-        return ResponseEntity.ok("Pedido recebido com sucesso! Status: PENDENTE");
+    public ResponseEntity<Pedido> criarPedido(@RequestBody @Valid PedidoRequestDTO data) {
+        // Obtém o usuário autenticado do contexto de segurança
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Usuario cliente = (Usuario) authentication.getPrincipal(); // O principal é o nosso objeto Usuario
+
+        // Chama o serviço para criar o pedido, passando o DTO e o cliente
+        Pedido novoPedido = service.criarPedido(data, cliente);
+        
+        // Retorna o pedido criado, que agora terá o ID
+        return ResponseEntity.ok(novoPedido);
     }
 
     // Rota para o Cliente acompanhar o status do pedido dele

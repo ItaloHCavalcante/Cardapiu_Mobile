@@ -46,6 +46,8 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
+
+    @PostMapping("/register") // Adicionei esta anotação!
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
         if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 

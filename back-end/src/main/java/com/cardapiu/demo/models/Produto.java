@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
+// import java.awt.*; // REMOVIDO: Esta importação não é necessária e pode causar conflitos
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data // Adicionado para gerar getters e setters automaticamente
 public class Produto {
 
     @Id
@@ -25,44 +26,10 @@ public class Produto {
     @JsonIgnoreProperties("Produtos") // Evita um loop infinito quando o Spring gerar o JSON
     private Categoria categoria;
 
+    // Adicionado: Relacionamento com o Restaurante
+    @ManyToOne
+    @JoinColumn(name = "restaurante_id", nullable = true) // Alterado para 'true' temporariamente para depuração
+    private Restaurante restaurante;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
-    }
+    // Removidos getters e setters manuais, pois @Data do Lombok já faz isso
 }

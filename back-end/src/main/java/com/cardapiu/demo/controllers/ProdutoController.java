@@ -1,7 +1,10 @@
 package com.cardapiu.demo.controllers;
+import com.cardapiu.demo.dtos.ProdutoRequestDTO;
 import com.cardapiu.demo.models.Produto;
-import com.cardapiu.demo.repositories.ProdutoRepository;
+import com.cardapiu.demo.services.ProdutoService; // Vamos criar este serviço
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,31 +14,28 @@ import java.util.List;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepository repository;
+    private ProdutoService service; // Injetando o novo serviço
 
     @GetMapping
     public List<Produto> listarTodos() {
-        return repository.findAll();
+        return service.listarTodos();
     }
+
     @PostMapping
-    public Produto salvar(@RequestBody Produto produto) {
-        return repository.save(produto);
+    public ResponseEntity<Produto> criarProduto(@RequestBody @Valid ProdutoRequestDTO data) {
+        Produto novoProduto = service.criarProduto(data);
+        return ResponseEntity.ok(novoProduto);
     }
+
     @DeleteMapping("/{id}")
-    public void remover(@PathVariable Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        service.remover(id);
+        return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
-
-        return repository.findById(id).map(produto -> {
-            produto.setNome(produtoAtualizado.getNome());
-            produto.setPreco(produtoAtualizado.getPreco());
-            produto.setDescricao(produtoAtualizado.getDescricao());
-
-            return repository.save(produto);
-        }).orElseThrow(() -> new RuntimeException("Produto não encontrado "));
+    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody @Valid ProdutoRequestDTO data) {
+        Produto produtoAtualizado = service.atualizar(id, data);
+        return ResponseEntity.ok(produtoAtualizado);
     }
-
 }
-

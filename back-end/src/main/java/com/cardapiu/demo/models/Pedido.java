@@ -20,6 +20,11 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Usuario cliente;
 
+    // Adicionado: Relacionamento com o restaurante
+    @ManyToOne
+    @JoinColumn(name = "restaurante_id")
+    private Restaurante restaurante;
+
     @Column(nullable = false)
     private LocalDateTime dataCriacao = LocalDateTime.now();
 

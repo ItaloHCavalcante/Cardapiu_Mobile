@@ -1,15 +1,21 @@
 package com.cardapiu.demo.services;
 
+import com.cardapiu.demo.dtos.ItemPedidoRequestDTO;
+import com.cardapiu.demo.dtos.PedidoRequestDTO;
 import com.cardapiu.demo.dtos.PedidoResponseDTO;
 import com.cardapiu.demo.dtos.UpdateStatusDTO;
-import com.cardapiu.demo.models.Entrega;
-import com.cardapiu.demo.models.Pedido;
-import com.cardapiu.demo.models.StatusPedido;
-import com.cardapiu.demo.models.Usuario;
+import com.cardapiu.demo.models.*;
 import com.cardapiu.demo.repositories.EntregaRepository;
+import com.cardapiu.demo.repositories.ItemPedidoRepository;
 import com.cardapiu.demo.repositories.PedidoRepository;
+import com.cardapiu.demo.repositories.ProdutoRepository;
+import com.cardapiu.demo.repositories.RestauranteRepository; // Importando RestauranteRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +28,60 @@ public class PedidoService {
     private EntregaRepository entregaRepository;
 
     @Autowired
-    private NotificationService notificationService; // Injetando o serviço de notificação
+    private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private RestauranteRepository restauranteRepository; // Injetando RestauranteRepository
+
+    @Autowired
+    private NotificationService notificationService;
+
+    @Transactional // Garante que a operação seja atômica
+    public Pedido criarPedido(PedidoRequestDTO pedidoRequestDTO, Usuario cliente) {
+        // Busca o restaurante pelo ID fornecido no DTO
+        Restaurante restaurante = restauranteRepository.findById(pedidoRequestDTO.restauranteId())
+                .orElseThrow(() -> new RuntimeException("Restaurante não encontrado: " + pedidoRequestDTO.restauranteId()));
+
+        Pedido pedido = new Pedido();
+        pedido.setCliente(cliente); // Associa o cliente ao pedido
+        pedido.setRestaurante(restaurante); // Associa o restaurante ao pedido
+        pedido.setStatus(StatusPedido.PENDENTE);
+        pedido.setObservacao(pedidoRequestDTO.observacao());
+        pedido.setValorTotal(0.0); // Inicializa o valor total
+
+        // Salva o pedido primeiro para obter um ID antes de adicionar os itens
+        Pedido pedidoSalvo = pedidoRepository.save(pedido);
+
+        List<ItemPedido> itensPedido = new ArrayList<>();
+        double valorTotalCalculado = 0.0;
+
+        for (ItemPedidoRequestDTO itemDTO : pedidoRequestDTO.itens()) {
+            Produto produto = produtoRepository.findById(itemDTO.produtoId())
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + itemDTO.produtoId()));
+
+            ItemPedido itemPedido = new ItemPedido();
+            itemPedido.setPedido(pedidoSalvo);
+            itemPedido.setProduto(produto);
+            itemPedido.setQuantidade(itemDTO.quantidade());
+            itemPedido.setPrecoUnitario(produto.getPreco());
+            
+            double precoTotalItem = produto.getPreco() * itemDTO.quantidade();
+            itemPedido.setPrecoTotal(precoTotalItem); 
+
+            itensPedido.add(itemPedido);
+            valorTotalCalculado += precoTotalItem;
+        }
+
+        itemPedidoRepository.saveAll(itensPedido);
+
+        pedidoSalvo.setValorTotal(valorTotalCalculado);
+        pedidoSalvo.setItens(itensPedido);
+
+        return pedidoRepository.save(pedidoSalvo);
+    }
 
     public Pedido atualizarStatus(Long id, UpdateStatusDTO data) {
         Pedido pedido = pedidoRepository.findById(id)
@@ -31,7 +90,6 @@ public class PedidoService {
         pedido.setStatus(data.status());
         Pedido pedidoAtualizado = pedidoRepository.save(pedido);
 
-        // Lógica para enviar a notificação
         enviarNotificacaoDeStatus(pedidoAtualizado);
 
         return pedidoAtualizado;
@@ -40,7 +98,7 @@ public class PedidoService {
     private void enviarNotificacaoDeStatus(Pedido pedido) {
         Usuario cliente = pedido.getCliente();
         if (cliente == null || cliente.getFcmToken() == null) {
-            return; // Não faz nada se não houver cliente ou token
+            return;
         }
 
         String fcmToken = cliente.getFcmToken();
