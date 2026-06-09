@@ -15,6 +15,11 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    // Relacionamento com o cliente que fez o pedido
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Usuario cliente;
+
     @Column(nullable = false)
     private LocalDateTime dataCriacao = LocalDateTime.now();
 

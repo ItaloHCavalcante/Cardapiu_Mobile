@@ -22,6 +22,10 @@ public class Usuario implements UserDetails {
 
     @Column(nullable = true)
     private String nome;
+    
+    // Campo para armazenar o token do dispositivo para Push Notifications
+    @Column(nullable = true)
+    private String fcmToken;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -41,10 +45,6 @@ public class Usuario implements UserDetails {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
         }
     }
-    }
-
-
-
 
     @Override
     public String getPassword() {return senha; }
@@ -58,9 +58,4 @@ public class Usuario implements UserDetails {
     public boolean isCredentialsNonExpired() { return true; }
     @Override
     public boolean isEnabled() { return true; }
-
-
 }
-
-
-

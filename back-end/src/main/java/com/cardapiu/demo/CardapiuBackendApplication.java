@@ -12,12 +12,20 @@ import org.springframework.context.annotation.Bean;
 public class CardapiuBackendApplication {
 
 	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.configure().load();
+		Dotenv dotenv = Dotenv.configure()
+				.ignoreIfMissing() // Evita falhar se não houver .env (ex: em produção)
+				.load();
 
-		System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
-		System.setProperty("JWT_EXPIRATION", dotenv.get("JWT_EXPIRATION"));
+		if (dotenv.get("JWT_SECRET") != null) {
+			System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
+		}
+		if (dotenv.get("JWT_EXPIRATION") != null) {
+			System.setProperty("JWT_EXPIRATION", dotenv.get("JWT_EXPIRATION"));
+		}
+		if (dotenv.get("DB_PASSWORD") != null) {
+			System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+		}
 
 		SpringApplication.run(CardapiuBackendApplication.class, args);
-
 	}
 }
