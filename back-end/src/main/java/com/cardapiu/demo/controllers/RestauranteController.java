@@ -14,6 +14,10 @@ public class RestauranteController {
     @Autowired
     private RestauranteRepository repository;
 
+    @GetMapping("/buscar")
+    public List<Restaurante> buscarPorNome(@RequestParam String nome) {
+        return repository.findByNomeContainingIgnoreCase(nome);
+    }
     @GetMapping
     public List<Restaurante> listarTodos() {
         return repository.findAll();
