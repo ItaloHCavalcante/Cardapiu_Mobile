@@ -27,19 +27,35 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
 
+        // --- DEBUG: Verifica se o token foi recuperado ---
+        System.out.println("DEBUG: Token recuperado: " + (token != null ? token.substring(0, Math.min(token.length(), 20)) + "..." : "null"));
+
         if(token != null){
             var login = tokenService.validarToken(token);
-            UserDetails user = usuarioRepository.findByLogin(login);
+            // --- DEBUG: Verifica o login extraído do token ---
+            System.out.println("DEBUG: Login extraído do token: '" + login + "'");
 
-            if (user != null) {
-                var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (login != null && !login.isEmpty()) { // Garante que o login não é nulo ou vazio
+                UserDetails user = usuarioRepository.findByLogin(login);
 
-                // --- LINHA DE DEBUG TEMPORÁRIA ---
-                System.out.println("DEBUG: Usuário autenticado: " + user.getUsername());
-                System.out.println("DEBUG: Autoridades carregadas: " + user.getAuthorities());
-                // --- FIM LINHA DE DEBUG TEMPORÁRIA ---
+                if (user != null) {
+                    var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+                    // --- DEBUG: Usuário autenticado e autoridades ---
+                    System.out.println("DEBUG: Usuário autenticado: " + user.getUsername());
+                    System.out.println("DEBUG: Autoridades carregadas: " + user.getAuthorities());
+                } else {
+                    // --- DEBUG: Usuário não encontrado no banco de dados ---
+                    System.out.println("DEBUG: Usuário '" + login + "' não encontrado no banco de dados.");
+                }
+            } else {
+                // --- DEBUG: Token inválido ou expirado ---
+                System.out.println("DEBUG: Token inválido ou expirado (login vazio/nulo).");
             }
+        } else {
+            // --- DEBUG: Requisição sem token ---
+            System.out.println("DEBUG: Requisição sem token de autenticação.");
         }
 
         filterChain.doFilter(request, response);

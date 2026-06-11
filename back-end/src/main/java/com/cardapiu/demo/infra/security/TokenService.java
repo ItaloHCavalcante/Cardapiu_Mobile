@@ -19,6 +19,10 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
+    // Injetando a duração da expiração diretamente do application.properties
+    @Value("${api.security.token.expiration_hours}")
+    private long expirationHours; // Agora é lido diretamente do application.properties
+
     //Metodo para gerar o token
     public String gerarToken(Usuario usuario) {
         try {
@@ -27,7 +31,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(usuario.getLogin())
-                    .withClaim("role", usuario.getRole().name()) // <-- LINHA ADICIONADA/CORRIGIDA
+                    .withClaim("role", usuario.getRole().name())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
         }catch (JWTCreationException exception){
@@ -44,15 +48,12 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         }catch (JWTVerificationException exception){
-            return ""; // Se o token for inválido ou expirado, retorna vazio
+            // Lança uma exceção em vez de retornar string vazia
+            throw new JWTVerificationException("Token JWT inválido ou expirado", exception);
         }
     }
     private Instant genExpirationDate() {
-        // Usando a propriedade JWT_EXPIRATION do .env
-        // Convertendo de milissegundos para horas para usar com plusHours
-        long expirationMillis = Long.parseLong(System.getProperty("JWT_EXPIRATION"));
-        long expirationHours = expirationMillis / (1000 * 60 * 60); // Convertendo ms para horas
-
+        // Usa a variável 'expirationHours' injetada
         return LocalDateTime.now().plusHours(expirationHours).toInstant(ZoneOffset.of("-03:00"));
     }
 

@@ -34,7 +34,7 @@ public class Pedido {
 
     // Adicionado: Campo para diferenciar entrega ou retirada no local
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = true) // CORRIGIDO: Alterado para nullable = true temporariamente
     private TipoEntrega tipoEntrega = TipoEntrega.ENTREGA; // Valor padrão
 
     // RELACIONAMENTO COM OS ITENS DO PEDIDO
