@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="de5afa18-b6d4-42d5-bd0f-59b182ad4437" name="Changes" comment="ATUALIZAçÃO: Protegi dados sensíveis." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+        <option value="Record" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="integracao_front_back" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ItaloHCavalcante&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ItaloHCavalcante/Cardapiu_Mobile.git",
+    "accountId": "0e930f1c-76c0-4786-8847-a32af9981d18"
+  }
+}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.5781664838167413" />
+      <entry key="MS500" value="4.2969252007347585" />
+      <entry key="S2" value="11.607886882032355" />
+      <entry key="S5" value="20.060567219154517" />
+      <entry key="S10" value="25.635872798797948" />
+      <entry key="S30" value="30.814341118090688" />
+      <entry key="S60" value="32.35060714605258" />
+      <entry key="M2" value="33.16058526229259" />
+      <entry key="M5" value="33.66062488107565" />
+      <entry key="M10" value="33.829704375147024" />
+      <entry key="M15" value="33.88633396967024" />
+      <entry key="M30" value="33.94309905548302" />
+      <entry key="H1" value="33.97153252239851" />
+      <entry key="H2" value="33.98576200698422" />
+      <entry key="H4" value="33.99287993957823" />
+      <entry key="D1" value="33.99881317546663" />
+      <entry key="W1" value="33.999830450018194" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.536200848569046" />
+      <entry key="MS500" value="4.275152071925277" />
+      <entry key="S2" value="11.592013257415644" />
+      <entry key="S5" value="20.048272761544904" />
+      <entry key="S10" value="25.627571562050516" />
+      <entry key="S30" value="30.810876777709822" />
+      <entry key="S60" value="32.3487692790644" />
+      <entry key="M2" value="33.15963827892342" />
+      <entry key="M5" value="33.66023913644875" />
+      <entry key="M10" value="33.82951032552284" />
+      <entry key="M15" value="33.88620434022179" />
+      <entry key="M30" value="33.943034108888966" />
+      <entry key="H1" value="33.971500016067544" />
+      <entry key="H2" value="33.985745745551924" />
+      <entry key="H4" value="33.992871806794334" />
+      <entry key="D1" value="33.99881181971537" />
+      <entry key="W1" value="33.99983025633243" />
+    </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Security Analysis" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3Ad6pkktoxTnqCuK6hKiD5DSg6Y" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.com.cardapiu.demo.repositories in demo.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.CardapiuBackendApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/italo-henrique/Projetos/Cardapiu_Mobile",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="com.cardapiu.demo.repositories in demo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cardapiu.demo.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cardapiu.demo.repositories" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CardapiuBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.cardapiu.demo.CardapiuBackendApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cardapiu.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.CardapiuBackendApplication" />
+        <item itemvalue="JUnit.com.cardapiu.demo.repositories in demo" />
+        <item itemvalue="Spring Boot.CardapiuBackendApplication" />
+        <item itemvalue="JUnit.com.cardapiu.demo.repositories in demo" />
+        <item itemvalue="JUnit.com.cardapiu.demo.repositories in demo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="de5afa18-b6d4-42d5-bd0f-59b182ad4437" name="Changes" comment="" />
+      <created>1772910285828</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772910285828</updated>
+      <workItem from="1772910477863" duration="15388000" />
+      <workItem from="1772974545937" duration="7272000" />
+      <workItem from="1773237400033" duration="4054000" />
+      <workItem from="1773932205091" duration="11000" />
+      <workItem from="1777045695385" duration="6310000" />
+      <workItem from="1777330670389" duration="17000" />
+      <workItem from="1777346459735" duration="228000" />
+      <workItem from="1777347196001" duration="2105000" />
+      <workItem from="1777469253439" duration="4652000" />
+      <workItem from="1777567433915" duration="3153000" />
+      <workItem from="1777574578446" duration="717000" />
+      <workItem from="1780869424838" duration="48000" />
+      <workItem from="1781189162293" duration="3832000" />
+    </task>
+    <task id="LOCAL-00001" summary="Adicionei a opção de alterar dados do pedido e corrigi a operação DELETE dos controllers.">
+      <option name="closed" value="true" />
+      <created>1772916863425</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1772916863425</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adicionei a opção de listar os produtos como categorias, ex: Bebidas, Comidas, Petiscos. Também adicionei as dependências JWT no projeto para uma futura inserção de autenticação">
+      <option name="closed" value="true" />
+      <created>1772937936635</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1772937936635</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ATUALIZAçÃO: autenticação via JWT foi implementada. O acesso à lista de restaurantes e produtos foi limitada apenas a quem tem um token no header.">
+      <option name="closed" value="true" />
+      <created>1772987218180</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1772987218181</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ATUALIZAçÃO: Estruturei melhor as pastas.">
+      <option name="closed" value="true" />
+      <created>1777046123495</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1777046123495</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ATUALIZAçÃO: Adicionei novos Services, Controllers, repository e DTO's para a entrega/entregador.">
+      <option name="closed" value="true" />
+      <created>1777570457820</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1777570457820</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ATUALIZAçÃO: Adicionei novos Services, Controllers, repository e DTO's para a entrega/entregador.">
+      <option name="closed" value="true" />
+      <created>1777570479426</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1777570479426</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ATUALIZAçÃO: Protegi dados sensíveis.">
+      <option name="closed" value="true" />
+      <created>1777572049664</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1777572049664</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adicionei a opção de alterar dados do pedido e corrigi a operação DELETE dos controllers." />
+    <MESSAGE value="Adicionei a opção de listar os produtos como categorias, ex: Bebidas, Comidas, Petiscos. Também adicionei as dependências JWT no projeto para uma futura inserção de autenticação" />
+    <MESSAGE value="ATUALIZAçÃO: autenticação via JWT foi implementada. O acesso à lista de restaurantes e produtos foi limitada apenas a quem tem um token no header." />
+    <MESSAGE value="ATUALIZAçÃO: Estruturei melhor as pastas." />
+    <MESSAGE value="ATUALIZAçÃO: Adicionei novos Services, Controllers, repository e DTO's para a entrega/entregador." />
+    <MESSAGE value="ATUALIZAçÃO: Protegi dados sensíveis." />
+    <option name="LAST_COMMIT_MESSAGE" value="ATUALIZAçÃO: Protegi dados sensíveis." />
+  </component>
+</project>
