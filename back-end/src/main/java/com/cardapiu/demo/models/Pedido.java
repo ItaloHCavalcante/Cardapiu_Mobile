@@ -32,6 +32,11 @@ public class Pedido {
     @Column(nullable = false)
     private StatusPedido status = StatusPedido.PENDENTE;
 
+    // Adicionado: Campo para diferenciar entrega ou retirada no local
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoEntrega tipoEntrega = TipoEntrega.ENTREGA; // Valor padrão
+
     // RELACIONAMENTO COM OS ITENS DO PEDIDO
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens;

@@ -9,14 +9,16 @@ import com.cardapiu.demo.repositories.EntregaRepository;
 import com.cardapiu.demo.repositories.ItemPedidoRepository;
 import com.cardapiu.demo.repositories.PedidoRepository;
 import com.cardapiu.demo.repositories.ProdutoRepository;
-import com.cardapiu.demo.repositories.RestauranteRepository; // Importando RestauranteRepository
+import com.cardapiu.demo.repositories.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -34,25 +36,24 @@ public class PedidoService {
     private ItemPedidoRepository itemPedidoRepository;
 
     @Autowired
-    private RestauranteRepository restauranteRepository; // Injetando RestauranteRepository
+    private RestauranteRepository restauranteRepository;
 
     @Autowired
     private NotificationService notificationService;
 
-    @Transactional // Garante que a operação seja atômica
+    @Transactional
     public Pedido criarPedido(PedidoRequestDTO pedidoRequestDTO, Usuario cliente) {
-        // Busca o restaurante pelo ID fornecido no DTO
         Restaurante restaurante = restauranteRepository.findById(pedidoRequestDTO.restauranteId())
                 .orElseThrow(() -> new RuntimeException("Restaurante não encontrado: " + pedidoRequestDTO.restauranteId()));
 
         Pedido pedido = new Pedido();
-        pedido.setCliente(cliente); // Associa o cliente ao pedido
-        pedido.setRestaurante(restaurante); // Associa o restaurante ao pedido
+        pedido.setCliente(cliente);
+        pedido.setRestaurante(restaurante);
         pedido.setStatus(StatusPedido.PENDENTE);
         pedido.setObservacao(pedidoRequestDTO.observacao());
-        pedido.setValorTotal(0.0); // Inicializa o valor total
+        pedido.setValorTotal(0.0);
+        pedido.setTipoEntrega(pedidoRequestDTO.tipoEntrega()); // Define o tipo de entrega
 
-        // Salva o pedido primeiro para obter um ID antes de adicionar os itens
         Pedido pedidoSalvo = pedidoRepository.save(pedido);
 
         List<ItemPedido> itensPedido = new ArrayList<>();
@@ -61,6 +62,10 @@ public class PedidoService {
         for (ItemPedidoRequestDTO itemDTO : pedidoRequestDTO.itens()) {
             Produto produto = produtoRepository.findById(itemDTO.produtoId())
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + itemDTO.produtoId()));
+
+            if (!produto.getRestaurante().getId().equals(restaurante.getId())) {
+                throw new RuntimeException("Produto com ID " + itemDTO.produtoId() + " não pertence ao restaurante com ID " + restaurante.getId());
+            }
 
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setPedido(pedidoSalvo);
@@ -129,5 +134,29 @@ public class PedidoService {
         Long entregaId = entregaOptional.map(Entrega::getId).orElse(null);
 
         return new PedidoResponseDTO(pedido, entregaId);
+    }
+
+    // --- Novos métodos para listagem de pedidos ---
+
+    // Lista pedidos ativos para um cliente (exclui CANCELADO e ENTREGUE)
+    public List<Pedido> listarPedidosAtivosParaCliente(Long clienteId) {
+        List<StatusPedido> statusExcluidos = Arrays.asList(StatusPedido.CANCELADO, StatusPedido.ENTREGUE);
+        return pedidoRepository.findAllByClienteIdAndStatusNotIn(clienteId, statusExcluidos);
+    }
+
+    // Lista pedidos ativos para um restaurante (exclui CANCELADO e ENTREGUE)
+    public List<Pedido> listarPedidosAtivosParaRestaurante(Long restauranteId) {
+        List<StatusPedido> statusExcluidos = Arrays.asList(StatusPedido.CANCELADO, StatusPedido.ENTREGUE);
+        return pedidoRepository.findAllByRestauranteIdAndStatusNotIn(restauranteId, statusExcluidos);
+    }
+
+    // Lista todos os pedidos de um cliente (incluindo finalizados)
+    public List<Pedido> listarTodosPedidosParaCliente(Long clienteId) {
+        return pedidoRepository.findAllByClienteId(clienteId);
+    }
+
+    // Lista todos os pedidos de um restaurante (incluindo finalizados)
+    public List<Pedido> listarTodosPedidosParaRestaurante(Long restauranteId) {
+        return pedidoRepository.findAllByRestauranteId(restauranteId);
     }
 }

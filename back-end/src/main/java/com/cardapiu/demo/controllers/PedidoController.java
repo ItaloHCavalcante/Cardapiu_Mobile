@@ -13,6 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("pedidos")
 public class PedidoController {
@@ -23,21 +25,17 @@ public class PedidoController {
     // Rota para o Cliente fazer o pedido
     @PostMapping
     public ResponseEntity<Pedido> criarPedido(@RequestBody @Valid PedidoRequestDTO data) {
-        // Obtém o usuário autenticado do contexto de segurança
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Usuario cliente = (Usuario) authentication.getPrincipal(); // O principal é o nosso objeto Usuario
+        Usuario cliente = (Usuario) authentication.getPrincipal();
 
-        // Chama o serviço para criar o pedido, passando o DTO e o cliente
         Pedido novoPedido = service.criarPedido(data, cliente);
         
-        // Retorna o pedido criado, que agora terá o ID
         return ResponseEntity.ok(novoPedido);
     }
 
     // Rota para o Cliente acompanhar o status do pedido dele
     @GetMapping("/{id}")
     public ResponseEntity<PedidoResponseDTO> buscarPedido(@PathVariable Long id) {
-        // Agora retorna o DTO que contém o ID da entrega para o rastreamento via Firebase
         PedidoResponseDTO pedidoResponse = service.buscarPedidoParaRastreio(id);
         return ResponseEntity.ok(pedidoResponse);
     }
@@ -47,5 +45,44 @@ public class PedidoController {
     public ResponseEntity<Pedido> atualizarStatus(@PathVariable Long id, @RequestBody @Valid UpdateStatusDTO data) {
         Pedido pedidoAtualizado = service.atualizarStatus(id, data);
         return ResponseEntity.ok(pedidoAtualizado);
+    }
+
+    // --- Novos Endpoints para Listagem de Pedidos ---
+
+    // Lista pedidos ativos para o cliente logado
+    @GetMapping("/meus-pedidos/ativos")
+    public ResponseEntity<List<Pedido>> listarMeusPedidosAtivos() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Usuario cliente = (Usuario) authentication.getPrincipal();
+        List<Pedido> pedidos = service.listarPedidosAtivosParaCliente(cliente.getId());
+        return ResponseEntity.ok(pedidos);
+    }
+
+    // Lista todos os pedidos para o cliente logado (incluindo finalizados)
+    @GetMapping("/meus-pedidos/todos")
+    public ResponseEntity<List<Pedido>> listarTodosMeusPedidos() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Usuario cliente = (Usuario) authentication.getPrincipal();
+        List<Pedido> pedidos = service.listarTodosPedidosParaCliente(cliente.getId());
+        return ResponseEntity.ok(pedidos);
+    }
+
+    // Lista pedidos ativos para um restaurante específico (para o dono do restaurante)
+    @GetMapping("/restaurante/{restauranteId}/ativos")
+    public ResponseEntity<List<Pedido>> listarPedidosAtivosPorRestaurante(@PathVariable Long restauranteId) {
+        // Adicione aqui a verificação de segurança para garantir que apenas o dono do restaurante
+        // ou um ADMIN possa ver esses pedidos.
+        // Ex: .hasRole("ADMIN") ou uma lógica mais complexa para verificar o dono.
+        List<Pedido> pedidos = service.listarPedidosAtivosParaRestaurante(restauranteId);
+        return ResponseEntity.ok(pedidos);
+    }
+
+    // Lista todos os pedidos para um restaurante específico (para o dono do restaurante)
+    @GetMapping("/restaurante/{restauranteId}/todos")
+    public ResponseEntity<List<Pedido>> listarTodosPedidosPorRestaurante(@PathVariable Long restauranteId) {
+        // Adicione aqui a verificação de segurança para garantir que apenas o dono do restaurante
+        // ou um ADMIN possa ver esses pedidos.
+        List<Pedido> pedidos = service.listarTodosPedidosParaRestaurante(restauranteId);
+        return ResponseEntity.ok(pedidos);
     }
 }

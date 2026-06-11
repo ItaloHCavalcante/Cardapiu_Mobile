@@ -23,9 +23,11 @@ public class TokenService {
     public String gerarToken(Usuario usuario) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
+            // Adicionando a role como um claim no token
             return JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(usuario.getLogin())
+                    .withClaim("role", usuario.getRole().name()) // <-- LINHA ADICIONADA/CORRIGIDA
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
         }catch (JWTCreationException exception){
@@ -46,7 +48,12 @@ public class TokenService {
         }
     }
     private Instant genExpirationDate() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        // Usando a propriedade JWT_EXPIRATION do .env
+        // Convertendo de milissegundos para horas para usar com plusHours
+        long expirationMillis = Long.parseLong(System.getProperty("JWT_EXPIRATION"));
+        long expirationHours = expirationMillis / (1000 * 60 * 60); // Convertendo ms para horas
+
+        return LocalDateTime.now().plusHours(expirationHours).toInstant(ZoneOffset.of("-03:00"));
     }
 
 
