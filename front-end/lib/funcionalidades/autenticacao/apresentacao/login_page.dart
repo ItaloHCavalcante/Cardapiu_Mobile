@@ -79,23 +79,27 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                         validator: _required,
                       ),
-                      const SizedBox(height: 16),
-                      SegmentedButton<UserRole>(
-                        segments: UserRole.values
-                            .map(
-                              (role) => ButtonSegment(
-                                value: role,
-                                label: Text(role.label),
-                                icon: Icon(_iconFor(role)),
-                              ),
-                            )
-                            .toList(),
-                        selected: {_role},
-                        onSelectionChanged: (values) {
-                          setState(() => _role = values.first);
-                        },
-                      ),
-                      if (_registerMode && _role.isDeliverer) ...[
+                      if (_registerMode) ...[
+                        const SizedBox(height: 16),
+                        SegmentedButton<UserRole>(
+                          segments: UserRole.values
+                              .where((role) => role != UserRole.deliverer)
+                              .map(
+                                (role) => ButtonSegment(
+                                  value: role,
+                                  label: Text(role.label),
+                                  icon: Icon(_iconFor(role)),
+                                ),
+                              )
+                              .toList(),
+                          selected: {_role},
+                          onSelectionChanged: (values) {
+                            setState(() => _role = values.first);
+                          },
+                        ),
+                      ],
+                      // Removido campos de entregador já que não há suporte no momento
+                      /* if (_registerMode && _role.isDeliverer) ...[
                         const SizedBox(height: 12),
                         TextFormField(
                           controller: _placaController,
@@ -116,7 +120,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           ),
                           validator: _required,
                         ),
-                      ],
+                      ], */
                       if (session.error != null) ...[
                         const SizedBox(height: 12),
                         Text(
@@ -138,9 +142,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       TextButton(
                         onPressed: session.isBusy
                             ? null
-                            : () => setState(
-                                () => _registerMode = !_registerMode,
-                              ),
+                            : () => setState(() {
+                                  _registerMode = !_registerMode;
+                                  if (_role.isDeliverer) {
+                                    _role = UserRole.user;
+                                  }
+                                }),
                         child: Text(
                           _registerMode
                               ? 'Ja tenho uma conta'
