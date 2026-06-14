@@ -79,42 +79,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                         validator: _required,
                       ),
-                      const SizedBox(height: 16),
-                      SegmentedButton<UserRole>(
-                        segments: UserRole.values
-                            .map(
-                              (role) => ButtonSegment(
-                                value: role,
-                                label: Text(role.label),
-                                icon: Icon(_iconFor(role)),
-                              ),
-                            )
-                            .toList(),
-                        selected: {_role},
-                        onSelectionChanged: (values) {
-                          setState(() => _role = values.first);
-                        },
-                      ),
-                      if (_registerMode && _role.isDeliverer) ...[
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _placaController,
-                          textCapitalization: TextCapitalization.characters,
-                          decoration: const InputDecoration(
-                            labelText: 'Placa do veiculo',
-                            prefixIcon: Icon(Icons.badge_outlined),
-                          ),
-                          validator: _required,
-                        ),
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _telefoneController,
-                          keyboardType: TextInputType.phone,
-                          decoration: const InputDecoration(
-                            labelText: 'Telefone',
-                            prefixIcon: Icon(Icons.phone_outlined),
-                          ),
-                          validator: _required,
+                      if (_registerMode) ...[
+                        const SizedBox(height: 16),
+                        SegmentedButton<UserRole>(
+                          segments: UserRole.values
+                              .where((role) => role != UserRole.deliverer)
+                              .map(
+                                (role) => ButtonSegment(
+                                  value: role,
+                                  label: Text(role.label),
+                                  icon: Icon(_iconFor(role)),
+                                ),
+                              )
+                              .toList(),
+                          selected: {_role},
+                          onSelectionChanged: (values) {
+                            setState(() => _role = values.first);
+                          },
                         ),
                       ],
                       if (session.error != null) ...[
@@ -138,9 +119,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       TextButton(
                         onPressed: session.isBusy
                             ? null
-                            : () => setState(
-                                () => _registerMode = !_registerMode,
-                              ),
+                            : () => setState(() {
+                                  _registerMode = !_registerMode;
+                                  // Se voltar para login, garante que não está em uma role inválida
+                                  if (_role == UserRole.deliverer) {
+                                    _role = UserRole.user;
+                                  }
+                                }),
                         child: Text(
                           _registerMode
                               ? 'Ja tenho uma conta'
