@@ -7,6 +7,8 @@ import '../../../compartilhado/componentes/async_button.dart';
 import '../../pedidos/apresentacao/order_tracking_page.dart';
 import '../aplicacao/cart_controller.dart';
 import '../dominio/product.dart';
+import '../dominio/restaurant.dart';
+import 'restaurant_details_page.dart';
 
 class CatalogPage extends ConsumerStatefulWidget {
   const CatalogPage({super.key});
@@ -19,22 +21,20 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => ref.read(catalogControllerProvider).load());
+    Future.microtask(() => ref.read(catalogControllerProvider).loadRestaurants());
   }
 
   @override
   Widget build(BuildContext context) {
     final catalog = ref.watch(catalogControllerProvider);
-    final cart = ref.watch(cartControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cardapio'),
+        title: const Text('Restaurantes'),
         actions: [
           IconButton(
             tooltip: 'Atualizar',
-            onPressed: () =>
-                ref.read(catalogControllerProvider).load(force: true),
+            onPressed: () => ref.read(catalogControllerProvider).loadRestaurants(),
             icon: const Icon(Icons.refresh),
           ),
           IconButton(
@@ -45,37 +45,89 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () => ref.read(catalogControllerProvider).load(force: true),
-        child: catalog.isLoading && catalog.products.isEmpty
+        onRefresh: () => ref.read(catalogControllerProvider).loadRestaurants(),
+        child: catalog.isLoading && catalog.restaurants.isEmpty
             ? const Center(child: CircularProgressIndicator())
             : catalog.error != null
-            ? _ErrorState(
-                message: catalog.error!,
-                onRetry: () =>
-                    ref.read(catalogControllerProvider).load(force: true),
-              )
-            : ListView.separated(
-                padding: EdgeInsets.fromLTRB(
-                  16,
-                  16,
-                  16,
-                  cart.isEmpty ? 16 : 104,
-                ),
-                itemCount: catalog.products.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  final product = catalog.products[index];
-                  return _ProductCard(product: product);
-                },
-              ),
+                ? _ErrorState(
+                    message: catalog.error!,
+                    onRetry: () => ref.read(catalogControllerProvider).loadRestaurants(),
+                  )
+                : ListView.separated(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: catalog.restaurants.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 16),
+                    itemBuilder: (context, index) {
+                      final restaurant = catalog.restaurants[index];
+                      return _RestaurantCard(restaurant: restaurant);
+                    },
+                  ),
       ),
-      bottomSheet: cart.isEmpty ? null : const _CartBar(),
     );
   }
 }
 
-class _ProductCard extends ConsumerWidget {
-  const _ProductCard({required this.product});
+class _RestaurantCard extends StatelessWidget {
+  const _RestaurantCard({required this.restaurant});
+
+  final Restaurant restaurant;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => RestaurantDetailsPage(restaurant: restaurant),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (restaurant.imageUrl != null)
+              Image.network(
+                restaurant.imageUrl!,
+                height: 150,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => const SizedBox(
+                  height: 150,
+                  child: Icon(Icons.restaurant, size: 48),
+                ),
+              )
+            else
+              const SizedBox(
+                height: 150,
+                child: Icon(Icons.restaurant, size: 48),
+              ),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    restaurant.name,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${restaurant.address}, ${restaurant.number}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProductCard extends ConsumerWidget {
+  const ProductCard({super.key, required this.product});
 
   final Product product;
 
@@ -169,8 +221,8 @@ class _ProductCard extends ConsumerWidget {
   }
 }
 
-class _CartBar extends ConsumerWidget {
-  const _CartBar();
+class CartBar extends ConsumerWidget {
+  const CartBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

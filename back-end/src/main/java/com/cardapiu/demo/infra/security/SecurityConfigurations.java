@@ -32,6 +32,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
 
                         // Filtros de permissão de acesso
+                        // No seu arquivo SecurityConfigurations.java, adicione esta linha:
+
+                        .requestMatchers(HttpMethod.GET, "/restaurantes", "/restaurantes/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.POST, "/produtos").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/entregadores").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/pedidos").hasAnyRole("ADMIN", "USER")

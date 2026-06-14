@@ -98,29 +98,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           },
                         ),
                       ],
-                      // Removido campos de entregador já que não há suporte no momento
-                      /* if (_registerMode && _role.isDeliverer) ...[
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _placaController,
-                          textCapitalization: TextCapitalization.characters,
-                          decoration: const InputDecoration(
-                            labelText: 'Placa do veiculo',
-                            prefixIcon: Icon(Icons.badge_outlined),
-                          ),
-                          validator: _required,
-                        ),
-                        const SizedBox(height: 12),
-                        TextFormField(
-                          controller: _telefoneController,
-                          keyboardType: TextInputType.phone,
-                          decoration: const InputDecoration(
-                            labelText: 'Telefone',
-                            prefixIcon: Icon(Icons.phone_outlined),
-                          ),
-                          validator: _required,
-                        ),
-                      ], */
                       if (session.error != null) ...[
                         const SizedBox(height: 12),
                         Text(
@@ -144,7 +121,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ? null
                             : () => setState(() {
                                   _registerMode = !_registerMode;
-                                  if (_role.isDeliverer) {
+                                  // Se voltar para login, garante que não está em uma role inválida
+                                  if (_role == UserRole.deliverer) {
                                     _role = UserRole.user;
                                   }
                                 }),

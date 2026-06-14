@@ -28,6 +28,10 @@ public class ProdutoService {
         return produtoRepository.findAll();
     }
 
+    public List<Produto> listarPorRestaurante(Long restauranteId) {
+        return produtoRepository.findByRestauranteId(restauranteId);
+    }
+
     public Produto criarProduto(ProdutoRequestDTO data) {
         Restaurante restaurante = restauranteRepository.findById(data.restauranteId())
                 .orElseThrow(() -> new RuntimeException("Restaurante não encontrado com ID: " + data.restauranteId()));

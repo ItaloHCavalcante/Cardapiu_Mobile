@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5afa18-b6d4-42d5-bd0f-59b182ad4437" name="Changes" comment="ATUALIZAçÃO: Protegi dados sensíveis." />
+    <list default="true" id="de5afa18-b6d4-42d5-bd0f-59b182ad4437" name="Changes" comment="ATUALIZAçÃO: Protegi dados sensíveis.">
+      <change beforePath="$PROJECT_DIR$/.idea/Cardapiu_Mobile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Cardapiu_Mobile.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/ProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/ProdutoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/RestauranteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/RestauranteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/SecurityConfigurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/SecurityConfigurations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/repositories/ProdutoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/repositories/ProdutoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/services/ProdutoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/services/ProdutoService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -33,12 +44,12 @@
     &quot;assignee&quot;: &quot;ItaloHCavalcante&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ItaloHCavalcante/Cardapiu_Mobile.git",
-    "accountId": "0e930f1c-76c0-4786-8847-a32af9981d18"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ItaloHCavalcante/Cardapiu_Mobile.git&quot;,
+    &quot;accountId&quot;: &quot;733e4c19-d928-4475-aba8-aa864ea3fe8c&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -134,11 +145,16 @@
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "Spring Boot.CardapiuBackendApplication.executor": "Run",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "integração2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/italo-henrique/Projetos/Cardapiu_Mobile",
     "node.js.detected.package.eslint": "true",
@@ -146,10 +162,13 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.splitter.proportion": "0.28476083",
+    "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.com.cardapiu.demo.repositories in demo">
     <configuration name="com.cardapiu.demo.repositories in demo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo" />
       <extension name="coverage">
@@ -179,9 +198,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.CardapiuBackendApplication" />
         <item itemvalue="JUnit.com.cardapiu.demo.repositories in demo" />
-        <item itemvalue="Spring Boot.CardapiuBackendApplication" />
         <item itemvalue="JUnit.com.cardapiu.demo.repositories in demo" />
         <item itemvalue="JUnit.com.cardapiu.demo.repositories in demo" />
       </list>
