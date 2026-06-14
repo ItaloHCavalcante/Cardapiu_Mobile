@@ -21,6 +21,11 @@ public class ProdutoController {
         return service.listarTodos();
     }
 
+    @GetMapping("/restaurante/{id}")
+    public List<Produto> listarPorRestaurante(@PathVariable Long id) {
+        return service.listarPorRestaurante(id);
+    }
+
     @PostMapping
     public ResponseEntity<Produto> criarProduto(@RequestBody @Valid ProdutoRequestDTO data) {
         Produto novoProduto = service.criarProduto(data);
