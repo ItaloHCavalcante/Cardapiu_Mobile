@@ -44,24 +44,40 @@ class _CatalogPageState extends ConsumerState<CatalogPage> {
           ),
         ],
       ),
-      body: RefreshIndicator(
-        onRefresh: () => ref.read(catalogControllerProvider).loadRestaurants(),
-        child: catalog.isLoading && catalog.restaurants.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : catalog.error != null
-                ? _ErrorState(
-                    message: catalog.error!,
-                    onRetry: () => ref.read(catalogControllerProvider).loadRestaurants(),
-                  )
-                : ListView.separated(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: catalog.restaurants.length,
-                    separatorBuilder: (_, _) => const SizedBox(height: 16),
-                    itemBuilder: (context, index) {
-                      final restaurant = catalog.restaurants[index];
-                      return _RestaurantCard(restaurant: restaurant);
-                    },
-                  ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: TextField(
+              onChanged: (value) => ref.read(catalogControllerProvider).setSearchQuery(value),
+              decoration: const InputDecoration(
+                hintText: 'Pesquisar restaurante...',
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
+          ),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () => ref.read(catalogControllerProvider).loadRestaurants(),
+              child: catalog.isLoading && catalog.restaurants.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : catalog.error != null
+                      ? _ErrorState(
+                          message: catalog.error!,
+                          onRetry: () => ref.read(catalogControllerProvider).loadRestaurants(),
+                        )
+                      : ListView.separated(
+                          padding: const EdgeInsets.all(16),
+                          itemCount: catalog.filteredRestaurants.length,
+                          separatorBuilder: (_, _) => const SizedBox(height: 16),
+                          itemBuilder: (context, index) {
+                            final restaurant = catalog.filteredRestaurants[index];
+                            return _RestaurantCard(restaurant: restaurant);
+                          },
+                        ),
+            ),
+          ),
+        ],
       ),
     );
   }

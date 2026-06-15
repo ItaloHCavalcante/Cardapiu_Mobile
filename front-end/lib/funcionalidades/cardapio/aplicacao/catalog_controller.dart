@@ -11,9 +11,37 @@ class CatalogController extends ChangeNotifier {
 
   bool isLoading = false;
   String? error;
+  String searchQuery = '';
   List<Restaurant> restaurants = const [];
   List<Product> products = const [];
   Restaurant? selectedRestaurant;
+
+  List<Restaurant> get filteredRestaurants {
+    if (searchQuery.isEmpty) return restaurants;
+
+    final query = searchQuery.toLowerCase();
+    final startsWith = <Restaurant>[];
+    final contains = <Restaurant>[];
+    final others = <Restaurant>[];
+
+    for (final restaurant in restaurants) {
+      final name = restaurant.name.toLowerCase();
+      if (name.startsWith(query)) {
+        startsWith.add(restaurant);
+      } else if (name.contains(query)) {
+        contains.add(restaurant);
+      } else {
+        others.add(restaurant);
+      }
+    }
+
+    return [...startsWith, ...contains, ...others];
+  }
+
+  void setSearchQuery(String query) {
+    searchQuery = query;
+    notifyListeners();
+  }
 
   Future<void> loadRestaurants() async {
     isLoading = true;

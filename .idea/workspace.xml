@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5afa18-b6d4-42d5-bd0f-59b182ad4437" name="Changes" comment="ATUALIZAçÃO: resolvi bugs de autorização e adicionei a lista de itens no perfil do restaurante.">
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/config/DatabaseSeeder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/SecurityConfigurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/SecurityConfigurations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/TokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/repositories/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/repositories/UsuarioRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/lib/nucleo/tema/app_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/lib/nucleo/tema/app_theme.dart" afterDir="false" />
+    <list default="true" id="de5afa18-b6d4-42d5-bd0f-59b182ad4437" name="Changes" comment="ATUALIZAçÃO: Alterei a cor base do aplicativo e fiz ajustes na regra de negócio.">
+      <change beforePath="$PROJECT_DIR$/front-end/lib/funcionalidades/cardapio/aplicacao/catalog_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/lib/funcionalidades/cardapio/aplicacao/catalog_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/lib/funcionalidades/cardapio/apresentacao/catalog_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/lib/funcionalidades/cardapio/apresentacao/catalog_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781405280852</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ATUALIZAçÃO: Alterei a cor base do aplicativo e fiz ajustes na regra de negócio.">
+      <option name="closed" value="true" />
+      <created>1781556358219</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1781556358219</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +328,7 @@
     <MESSAGE value="ATUALIZAçÃO: Adicionei novos Services, Controllers, repository e DTO's para a entrega/entregador." />
     <MESSAGE value="ATUALIZAçÃO: Protegi dados sensíveis." />
     <MESSAGE value="ATUALIZAçÃO: Agora a lista de restaurantes cadastrado aparece na tela inicial, e os restaurantes tem um perfil." />
-    <option name="LAST_COMMIT_MESSAGE" value="ATUALIZAçÃO: Agora a lista de restaurantes cadastrado aparece na tela inicial, e os restaurantes tem um perfil." />
+    <MESSAGE value="ATUALIZAçÃO: Alterei a cor base do aplicativo e fiz ajustes na regra de negócio." />
+    <option name="LAST_COMMIT_MESSAGE" value="ATUALIZAçÃO: Alterei a cor base do aplicativo e fiz ajustes na regra de negócio." />
   </component>
 </project>
