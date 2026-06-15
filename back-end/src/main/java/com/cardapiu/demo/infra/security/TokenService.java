@@ -19,7 +19,7 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    // Injetando a duração da expiração diretamente do application.properties
+    // Injetando a duração da expiração em horas diretamente do application.properties
     @Value("${api.security.token.expiration_hours}")
     private long expirationHours; // Agora é lido diretamente do application.properties
 

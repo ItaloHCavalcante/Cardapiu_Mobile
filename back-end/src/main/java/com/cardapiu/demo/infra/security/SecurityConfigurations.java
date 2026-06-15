@@ -26,31 +26,28 @@ public class SecurityConfigurations {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {})
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // API REST não guarda sessão (Stateless)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
 
-                        // Filtros de permissão de acesso
-                        // No seu arquivo SecurityConfigurations.java, adicione esta linha:
+                        // --- Regras de Acesso para Restaurantes ---
+                        .requestMatchers(HttpMethod.GET, "/restaurantes", "/restaurantes/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/restaurantes").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/restaurantes/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/restaurantes/**").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.GET, "/restaurantes", "/restaurantes/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.POST, "/produtos").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/entregadores").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/pedidos").hasAnyRole("ADMIN", "USER")
 
-                        // Apenas os ADMIN e clientes poderão ver ou mexer nos produtos/cardapio
                         .requestMatchers("/produtos/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/cardapio/**").hasAnyRole("ADMIN", "USER")
 
-                        // Rota exclusiva para os entregadores
                         .requestMatchers("/entregadores/**").hasAnyRole("ADMIN", "DELIVERER")
                         .requestMatchers("/entregas/**").hasAnyRole("ADMIN", "DELIVERER")
 
-                        // Qualquer outra rota exige apenas que o usuário esteja autenticado
                         .anyRequest().authenticated()
-
-
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -63,6 +60,6 @@ public class SecurityConfigurations {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Criptografia de senha (nunca salve senha em texto puro!)
+        return new BCryptPasswordEncoder();
     }
 }

@@ -4,25 +4,23 @@ class AppTheme {
   const AppTheme._();
 
   static ThemeData light() {
-    const seed = Color(0xff16806a);
+    const seed = Color(0xffe47a2c);
     final scheme = ColorScheme.fromSeed(
       seedColor: seed,
       primary: seed,
-      secondary: const Color(0xffd25f2f),
-      tertiary: const Color(0xff2f5fd2),
     );
 
     return ThemeData(
       colorScheme: scheme,
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color(0xfff7f8f5),
+      scaffoldBackgroundColor: const Color(0xfff8f7f5),
       cardTheme: CardThemeData(
         elevation: 0,
         color: Colors.white,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          side: const BorderSide(color: Color(0xffe1e5df)),
+          side: const BorderSide(color: Color(0xfff1eeea)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
