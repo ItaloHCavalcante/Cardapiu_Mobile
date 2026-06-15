@@ -27,7 +27,7 @@ O projeto adota o modelo de arquitetura **Cliente-Servidor distribuído**, com r
 ## 🛠️ 3. Tecnologias Utilizadas
 
 ### **Back-End**
-* **Java 17** como linguagem base.
+* **Java 21** como linguagem base.
 * **Spring Boot 3.x** para fundação do ecossistema de microserviços/API.
 * **Spring Security & JWT (JSON Web Tokens)** para autenticação stateless e controle de permissões.
 * **Spring Data JPA** para mapeamento objeto-relacional e abstração de banco de dados.
