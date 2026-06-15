@@ -99,27 +99,6 @@ class _OrderLookupPageState extends ConsumerState<OrderLookupPage> {
               );
             },
           ),
-          const SizedBox(height: 20),
-          Text(
-            'Buscar por numero',
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _orderId,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              labelText: 'Numero do pedido',
-              prefixIcon: Icon(Icons.receipt_long_outlined),
-            ),
-          ),
-          const SizedBox(height: 12),
-          AsyncButton(
-            label: 'Buscar pedido',
-            icon: Icons.search,
-            isBusy: _isLoading,
-            onPressed: _lookup,
-          ),
         ],
       ),
     );

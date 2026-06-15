@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de5afa18-b6d4-42d5-bd0f-59b182ad4437" name="Changes" comment="ATUALIZAçÃO: Protegi dados sensíveis.">
-      <change beforePath="$PROJECT_DIR$/.idea/Cardapiu_Mobile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Cardapiu_Mobile.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/ProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/ProdutoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/RestauranteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/controllers/RestauranteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/SecurityConfigurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/infra/security/SecurityConfigurations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/repositories/ProdutoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/repositories/ProdutoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/services/ProdutoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/cardapiu/demo/services/ProdutoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/lib/funcionalidades/cardapio/apresentacao/catalog_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/lib/funcionalidades/cardapio/apresentacao/catalog_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/lib/funcionalidades/pedidos/apresentacao/order_lookup_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/lib/funcionalidades/pedidos/apresentacao/order_lookup_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="integracao_front_back" />
+        <entry key="$PROJECT_DIR$" value="integração2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -134,40 +130,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.com.cardapiu.demo.repositories in demo.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.CardapiuBackendApplication.executor": "Run",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "integração2",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/italo-henrique/Projetos/Cardapiu_Mobile",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "settings.editor.splitter.proportion": "0.28476083",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.com.cardapiu.demo.repositories in demo.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.CardapiuBackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/italo-henrique/Projetos/Cardapiu_Mobile&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.28476083&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="JUnit.com.cardapiu.demo.repositories in demo">
     <configuration name="com.cardapiu.demo.repositories in demo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo" />
@@ -289,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777572049664</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ATUALIZAçÃO: Agora a lista de restaurantes cadastrado aparece na tela inicial, e os restaurantes tem um perfil.">
+      <option name="closed" value="true" />
+      <created>1781405280852</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1781405280852</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,6 +309,7 @@
     <MESSAGE value="ATUALIZAçÃO: Estruturei melhor as pastas." />
     <MESSAGE value="ATUALIZAçÃO: Adicionei novos Services, Controllers, repository e DTO's para a entrega/entregador." />
     <MESSAGE value="ATUALIZAçÃO: Protegi dados sensíveis." />
-    <option name="LAST_COMMIT_MESSAGE" value="ATUALIZAçÃO: Protegi dados sensíveis." />
+    <MESSAGE value="ATUALIZAçÃO: Agora a lista de restaurantes cadastrado aparece na tela inicial, e os restaurantes tem um perfil." />
+    <option name="LAST_COMMIT_MESSAGE" value="ATUALIZAçÃO: Agora a lista de restaurantes cadastrado aparece na tela inicial, e os restaurantes tem um perfil." />
   </component>
 </project>

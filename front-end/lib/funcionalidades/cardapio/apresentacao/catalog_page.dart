@@ -342,7 +342,7 @@ class _CheckoutSheetState extends ConsumerState<_CheckoutSheet> {
                         onPressed: () => ref
                             .read(cartControllerProvider)
                             .decrement(item.product),
-                        icon: const Icon(Icons.remove_circle_outline),
+                        icon: const Icon(Icons.remove_circle_outline, color: Colors.red),
                       ),
                       Text(money(item.total)),
                     ],
