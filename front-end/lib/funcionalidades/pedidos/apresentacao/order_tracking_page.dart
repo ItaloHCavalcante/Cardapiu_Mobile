@@ -65,7 +65,11 @@ class _OrderTrackingPageState extends ConsumerState<OrderTrackingPage> {
                   ),
                   const SizedBox(height: 12),
                 ],
-                if (order != null) _OrderStatusCard(order: order),
+                if (order != null) ...[
+                  _OrderStatusCard(order: order),
+                  const SizedBox(height: 16),
+                  _OrderDetailsCard(order: order),
+                ],
                 const SizedBox(height: 16),
                 if (order?.deliveryId == null)
                   const _TrackingEmptyState(
@@ -144,6 +148,55 @@ class _OrderStatusCard extends StatelessWidget {
             if (order.deliveryId != null) ...[
               const SizedBox(height: 6),
               Text('Entrega #${order.deliveryId}'),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _OrderDetailsCard extends StatelessWidget {
+  const _OrderDetailsCard({required this.order});
+
+  final OrderSummary order;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Itens do pedido',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const Divider(),
+            ...order.items.map((item) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    children: [
+                      Text('${item.quantity}x'),
+                      const SizedBox(width: 8),
+                      Expanded(child: Text(item.productName)),
+                      Text(money(item.unitPrice)),
+                    ],
+                  ),
+                )),
+            const Divider(),
+            if (order.observation != null && order.observation!.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(
+                'Observação:',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              Text(order.observation!),
             ],
           ],
         ),

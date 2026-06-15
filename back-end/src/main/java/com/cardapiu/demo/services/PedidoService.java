@@ -126,6 +126,7 @@ public class PedidoService {
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
     }
 
+    @Transactional(readOnly = true)
     public PedidoResponseDTO buscarPedidoParaRastreio(Long pedidoId) {
         Pedido pedido = pedidoRepository.findById(pedidoId)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));

@@ -1,3 +1,4 @@
+import 'order_item.dart';
 import 'order_status.dart';
 
 class OrderSummary {
@@ -9,6 +10,7 @@ class OrderSummary {
     required this.deliveryType,
     this.deliveryId,
     this.createdAt,
+    this.items = const [],
   });
 
   final int id;
@@ -18,6 +20,7 @@ class OrderSummary {
   final String? deliveryType;
   final int? deliveryId;
   final DateTime? createdAt;
+  final List<OrderItem> items;
 
   factory OrderSummary.fromJson(Map<String, dynamic> json) {
     return OrderSummary(
@@ -28,6 +31,10 @@ class OrderSummary {
       deliveryType: json['tipoEntrega']?.toString(),
       deliveryId: _nullableInt(json['entregaId']),
       createdAt: DateTime.tryParse(json['dataCriacao']?.toString() ?? ''),
+      items: (json['itens'] as List?)
+              ?.map((i) => OrderItem.fromJson(Map<String, dynamic>.from(i)))
+              .toList() ??
+          const [],
     );
   }
 

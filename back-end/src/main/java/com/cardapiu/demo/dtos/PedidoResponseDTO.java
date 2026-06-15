@@ -13,7 +13,8 @@ public record PedidoResponseDTO(
         StatusPedido status,
         Double valorTotal,
         String observacao,
-        Long entregaId // Campo crucial para o rastreamento
+        Long entregaId,
+        List<ItemPedidoResponseDTO> itens
 ) {
     public PedidoResponseDTO(Pedido pedido, Long entregaId) {
         this(
@@ -22,7 +23,13 @@ public record PedidoResponseDTO(
                 pedido.getStatus(),
                 pedido.getValorTotal(),
                 pedido.getObservacao(),
-                entregaId // Incluindo o ID da entrega
+                entregaId,
+                pedido.getItens().stream()
+                        .map(item -> new ItemPedidoResponseDTO(
+                                item.getProduto().getNome(),
+                                item.getQuantidade(),
+                                item.getPrecoUnitario()))
+                        .collect(Collectors.toList())
         );
     }
 }
